@@ -1,13 +1,13 @@
-import path from "path";
-import { fileURLToPath } from "url";
+path = require('path');
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const source_folder = 'src'
 const dist_folder = 'dist';
 
-export default {
+module.exports =  {
     mode: 'development',
+    target: 'node',
     entry: {
-        bundle: './src/index.ts'
+        bundle: path.resolve(__dirname, source_folder, 'index.ts')
     },
     output: {
         path: path.resolve(__dirname, dist_folder),
@@ -27,5 +27,5 @@ export default {
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
-    devtool: 'source-map'
+    devtool: 'inline-source-map'
 }
