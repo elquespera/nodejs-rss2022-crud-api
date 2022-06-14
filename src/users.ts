@@ -10,7 +10,7 @@ export class Users {
     }
 
     getUser(id: string) {
-
+        return this.users.find(user => user.id === id);
     }
 
     getAllUsers(): Array<User> {
@@ -27,7 +27,7 @@ export class Users {
     }
 
     update(user: User) {
-        return false;
+
     }
 
     delete(id: string) {
