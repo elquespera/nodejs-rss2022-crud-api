@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "nodemon ./dist/bundle.js",
     "start:prod": "webpack && node ./dist/bundle.js",
-    "start": "webpack && nodemon ./dist/bundle.js"
+    "start": "webpack && node ./dist/bundle.js"
   },
   "repository": {
     "type": "git",
