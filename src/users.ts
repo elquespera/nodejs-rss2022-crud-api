@@ -26,7 +26,7 @@ export class Users {
         });
     }
 
-    update(user: User): boolean {
+    update(user: User) {
         return false;
     }
 
