@@ -1,9 +1,20 @@
-import { Users } from './users';
+import { createServer } from 'http';
 
-const users = new Users();
+import { serverListener, PORT } from './server';
 
-users.add('Name', 22, []);
-users.add('Second User', 45, []);
-users.add('Name', 45, ['Some hobby', 'Skiing']);
+const server = createServer(serverListener);
 
-console.log(users.getAllUsers());
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
+// import { Users } from './users';
+
+
+// const users = new Users();
+
+// users.add('Name', 22, []);
+// users.add('Second User', 45, []);
+// users.add('Name', 45, ['Some hobby', 'Skiing']);
+
+// console.log(users.getAllUsers());
