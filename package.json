@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "nodemon ./dist/bundle.js",
     "start:prod": "webpack && node ./dist/bundle.js",
-    "start": "webpack && node ./dist/bundle.js"
+    "start": "webpack && nodemon ./dist/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "uuid": "^8.3.2"
   }
 }
