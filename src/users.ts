@@ -9,8 +9,12 @@ export class Users {
 
     }
 
-    getUser(id: string) {
-        return this.users.find(user => user.id === id);
+    findUser(id: string): number {
+        return this.users.findIndex(user => user.id === id);
+    }
+
+    getUser(id: string): User {
+        return this.users[this.findUser(id)];
     }
 
     getAllUsers(): Array<User> {
@@ -26,11 +30,19 @@ export class Users {
         });
     }
 
-    update(user: User) {
-
+    update(id: string, name: string, age: number, hobbies: Array<string>) {
+        const index = this.findUser(id);
+        if (index >= 0) {
+            this.users[index].name = name;
+            this.users[index].age = age;
+            this.users[index].hobbies = hobbies;
+        }
     }
 
     delete(id: string) {
-
+        const index = this.findUser(id);
+        if (index >= 0) {
+            this.users.splice(index, 1);
+        }
     }
 }
