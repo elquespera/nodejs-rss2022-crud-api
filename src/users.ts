@@ -21,13 +21,14 @@ export class Users {
         return this.users;
     }
 
-    add(name: string, age: number, hobbies: Array<string>) {
+    add(name: string, age: number, hobbies: Array<string>): User {
         this.users.push({
             id: uuidv4(),
             name,
             age,
             hobbies
         });
+        return this.users[this.users.length - 1];
     }
 
     update(id: string, name: string, age: number, hobbies: Array<string>) {

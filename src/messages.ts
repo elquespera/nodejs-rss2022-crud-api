@@ -1,24 +1,27 @@
 import { ServerResponse } from 'http';
 
 
-const ERROR_400 = 'User ID provided is not valid';
+const ERROR_400_ID = 'User ID provided is not valid.';
+const ERROR_400_FIELD = 'The request does not contain required fields for new user or their values are invalid.';
 
-const ERROR_404_PAGE = 'Requested page not found';
-const ERROR_404_USER = (id: string): string => `The user with ID=${id} not found`;
+const ERROR_404_PAGE = 'Requested page not found.';
+const ERROR_404_USER = (id: string): string => `The user with ID=${id} not found.`;
 
-const sendMessage = (code: number, msg: any, res: ServerResponse) => {
+const sendMessage = (res: ServerResponse, code: number, msg?: any) => {
     res.writeHead(code, { "Content-Type": "application/json" });
     res.end(JSON.stringify(msg));
 }
 
 // Page or User ID not found
-const send404 = (res: ServerResponse, msg?: string) => {
-    sendMessage(404, msg || ERROR_404_PAGE, res);
+const send404 = (res: ServerResponse, msg: string = ERROR_404_PAGE) => {
+    sendMessage(res, 404, msg);
 }
 
 // User ID invalid
-const send400 = (res: ServerResponse) => sendMessage(400, ERROR_400, res);
+const send400 = (res: ServerResponse, msg: string = ERROR_400_ID) => {
+    sendMessage(res, 400, msg);
+}
 
 
 
-export { sendMessage, send400, send404, ERROR_404_USER }
+export { sendMessage, send400, send404, ERROR_404_USER, ERROR_400_FIELD }
