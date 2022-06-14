@@ -2,9 +2,10 @@ import { validate as validateUUID } from 'uuid';
 
 // Parse uuid from url like api/users/uuid
 // and check whether it is valid
-const parseUserID = (url: string): string | boolean => {
+const parseUserID = (url: string): string => {
     const parts = url.split('/');
-    return validateUUID(parts[2]) ? parts[2] : false;
+    //console.log(parts);
+    return validateUUID(parts[3]) ? parts[3] : undefined;
 }
 
 export { parseUserID };

@@ -1,15 +1,19 @@
 import { IncomingMessage, ServerResponse } from 'http';
 
 import { Users } from './users';
-import { sendMessage, send404 } from './messages';
+import { sendMessage, send400, send404, ERROR_404_USER } from './messages';
 import { parseUserID } from './url';
 
 import 'dotenv/config';
 
 const users = new Users();
 
+users.add('Somebody', 22, []);
+users.add('Ann', 245, []);
+users.add('Joe Smith', 38, ['Piano', 'Cooking']);
+users.add('Jill', 55, ['Skating']);
+
 const API_ROUTE = '/api/users';
-const validMethods = ['GET', 'POST', 'PUT', 'DELETE'];
 
 // Try to import PORT from .env file,
 // if not, default to 5000
@@ -17,20 +21,28 @@ export const PORT = process.env.PORT || 5000;
 
 // Process events from http Server
 export const serverListener = (req: IncomingMessage, res: ServerResponse) => {
+    console.log(req.url);
 
-    // Check if API entry point is correct
-    if (req.url.startsWith(API_ROUTE)) {
+    if (req.method === 'GET' && req.url === API_ROUTE) {
+        sendMessage(200, users.getAllUsers(), res);
+    } 
+    else if (req.url.startsWith(API_ROUTE)) {
         const userID = parseUserID(req.url);
-        //sendMessage(200, userID, res);
 
         switch (req.method) {
             case 'GET':
-
-                break;            
-            default:
-                send404(res);    
+                if (userID) {
+                    const user = users.getUser(userID);
+                    if (user) {
+                        sendMessage(200, user, res);
+                    } else {
+                        send404(res, ERROR_404_USER(userID));
+                    }
+                } else {
+                    send400(res);
+                }
         }
-    }
+    } 
     else {
         send404(res);
     }
