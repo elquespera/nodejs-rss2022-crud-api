@@ -41,6 +41,22 @@ export const serverListener = (req: IncomingMessage, res: ServerResponse) => {
                 } else {
                     send400(res);
                 }
+                break;
+            case 'POST': 
+                break;
+            case 'PUT':
+                break;
+            case 'DELETE':
+                if (userID) {
+                    if (users.delete(userID)) {
+                        sendMessage(204, '', res);
+                    } else {
+                        send404(res, ERROR_404_USER(userID));
+                    }
+                } else {
+                    send400(res);
+                }
+                break;
         }
     } 
     else {

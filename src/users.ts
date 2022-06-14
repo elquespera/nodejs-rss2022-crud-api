@@ -1,4 +1,4 @@
-import { v4 as uuidv4,  validate as uuidValidate } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import { User } from "./user";
 
@@ -39,10 +39,11 @@ export class Users {
         }
     }
 
-    delete(id: string) {
+    delete(id: string): boolean {
         const index = this.findUser(id);
         if (index >= 0) {
             this.users.splice(index, 1);
         }
+        return index >= 0;
     }
 }
