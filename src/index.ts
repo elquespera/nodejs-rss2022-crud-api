@@ -1,5 +1,8 @@
-import { User } from './user';
+import { UserAccount, User } from './user';
+import { Users } from './users';
 
-const user = new User('Name', 22, []);
+const user:User = new UserAccount('Name', 22, []);
+
+const users = new Users();
 
 console.log(user);

@@ -1,9 +1,16 @@
 import { randomUUID } from 'crypto';
 
-// User Class that automatically adds an id
-
-export class User {
+export interface User {
     id: string;
+    name: string;
+    age: number;
+    hobbies: Array<string>;
+}
+
+// User Class that automatically adds a uuid to it
+
+export class UserAccount {
+    id!: string;
     name!: string;
     age!: number;
     hobbies!: Array<string>;
