@@ -24,8 +24,8 @@ const parseUserParams = (url: URL): User => {
 
     const user: User = {
         id: 'id',
-        name: url.searchParams.get('name'),
-        age: parseInt(url.searchParams.get('age')),
+        name: url.searchParams.get('name') || undefined,
+        age: parseInt(url.searchParams.get('age')) || undefined,
         hobbies: hobbies
     }
 
@@ -60,7 +60,9 @@ const parseURL = (request: IncomingMessage): UrlParams => {
                 }
                 break;
             case 4:
-                urlParams.path = API_ROUTE + '/';
+                if (parts.slice(0, 3).join('/') === API_ROUTE) {
+                    urlParams.path = API_ROUTE + '/';
+                }
                 break; 
         }
     }

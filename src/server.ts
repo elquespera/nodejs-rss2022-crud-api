@@ -1,7 +1,8 @@
 import { IncomingMessage, ServerResponse } from 'http';
 
 import { Users } from './users';
-import { sendMessage, sendMessageIfDefined, send400, send404, ERROR_400_FIELD } from './messages';
+import { sendMessage, sendMessageIfDefined, send400, 
+         send404, send500, ERROR_400_FIELD } from './messages';
 import { parseURL, UrlParams, API_ROUTE } from './url';
 
 import 'dotenv/config';
@@ -29,8 +30,11 @@ export const serverListener = (req: IncomingMessage, res: ServerResponse) => {
     try {
         const url: UrlParams = parseURL(req);
 
+        // Check if url is valid for a given method
         if (checkPath(url.path, req.method)) {
-             switch (req.method) {
+
+            // Method Switch
+            switch (req.method) {
                 case 'GET':
                     if (url.path === API_ROUTE) {
                         sendMessage(res, 200, users.getAllUsers());
@@ -73,12 +77,16 @@ export const serverListener = (req: IncomingMessage, res: ServerResponse) => {
                     break;                                                     
             }
         }
+
+        // Send 404 response if url path and/or method are invalid
         else {
             send404(res); 
         }
     }
+
+    // Send 500 response if there was a server-side error
     catch(error) {
-        //error 500
+        send500(res);
     }        
 
 }

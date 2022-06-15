@@ -7,6 +7,8 @@ const ERROR_400_FIELD = 'The request does not contain required fields for new us
 const ERROR_404_PAGE = 'Requested page not found.';
 const ERROR_404_USER = (id: string): string => `The user with ID=${id} not found.`;
 
+const ERROR_500 = 'An error occurred during request handling by server.'
+
 const sendMessage = (res: ServerResponse, code: number, msg?: any) => {
     res.writeHead(code, { "Content-Type": "application/json" });
     res.end(JSON.stringify(msg));
@@ -22,6 +24,13 @@ const send400 = (res: ServerResponse, msg: string = ERROR_400_ID) => {
     sendMessage(res, 400, msg);
 }
 
+// Server side error
+
+const send500 = (res: ServerResponse, msg: string = ERROR_500) => {
+    sendMessage(res, 500, msg);
+}
+
+// Send Message only if body is defined, else send user not found
 const sendMessageIfDefined = (res: ServerResponse, code: number, userID: string, body?: any) => {
     if (body) 
         sendMessage(res, code, body);
@@ -30,4 +39,5 @@ const sendMessageIfDefined = (res: ServerResponse, code: number, userID: string,
 }
 
 
-export { sendMessage, send400, send404, sendMessageIfDefined, ERROR_404_USER, ERROR_400_FIELD }
+
+export { sendMessage, send400, send404, send500, sendMessageIfDefined, ERROR_400_FIELD }
