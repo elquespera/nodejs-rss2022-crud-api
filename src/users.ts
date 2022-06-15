@@ -31,12 +31,26 @@ export class Users {
         return this.users[this.users.length - 1];
     }
 
-    update(id: string, name: string, age: number, hobbies: Array<string>) {
-        const index = this.findUser(id);
-        if (index >= 0) {
-            this.users[index].name = name;
-            this.users[index].age = age;
-            this.users[index].hobbies = hobbies;
+    update(user: User, add: boolean = false): User {
+        if (!user) return undefined;
+        if (add) {
+            this.users.push({ 
+                id: uuidv4(), 
+                name: user.name,
+                age: user.age,
+                hobbies: user.hobbies 
+            });
+            return this.users[this.users.length - 1];
+        } else {
+            const index = this.findUser(user.id);
+            if (index >= 0) {
+                this.users[index].name = user.name;
+                this.users[index].age = user.age;
+                this.users[index].hobbies = user.hobbies;
+                return user;
+            } else {
+                return undefined;
+            }
         }
     }
 

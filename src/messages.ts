@@ -22,6 +22,12 @@ const send400 = (res: ServerResponse, msg: string = ERROR_400_ID) => {
     sendMessage(res, 400, msg);
 }
 
+const sendMessageIfDefined = (res: ServerResponse, code: number, userID: string, body?: any) => {
+    if (body) 
+        sendMessage(res, code, body);
+    else
+        send404(res, ERROR_404_USER(userID));
+}
 
 
-export { sendMessage, send400, send404, ERROR_404_USER, ERROR_400_FIELD }
+export { sendMessage, send400, send404, sendMessageIfDefined, ERROR_404_USER, ERROR_400_FIELD }
