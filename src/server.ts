@@ -2,7 +2,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 
 import { Users } from './users';
 import { sendMessage, sendMessageIfDefined, send400, send404, ERROR_400_FIELD } from './messages';
-import { parseURL } from './url';
+import { parseURL, UrlParams, API_ROUTE } from './url';
 
 import 'dotenv/config';
 
@@ -13,7 +13,6 @@ users.add('Ann', 245, []);
 users.add('Joe Smith', 38, ['Piano', 'Cooking']);
 users.add('Jill', 55, ['Skating']);
 
-const API_ROUTE = '/api/users';
 
 // Try to import PORT from .env file,
 // if not, default to 5000
@@ -28,7 +27,7 @@ export const serverListener = (req: IncomingMessage, res: ServerResponse) => {
     }
 
     try {
-        const url = parseURL(req);
+        const url: UrlParams = parseURL(req);
 
         if (checkPath(url.path, req.method)) {
              switch (req.method) {

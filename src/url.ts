@@ -12,24 +12,26 @@ const parseUserID = (url: URL): string => {
     return validateUUID(parts[3]) ? parts[3] : undefined;
 }
 
+// Convert URL params into User class
 const parseUserParams = (url: URL): User => {
+    
     let hobbies;
-
     try {
         hobbies = JSON.parse(url.searchParams.get('hobbies'));
         hobbies = Array.isArray(hobbies) ? hobbies.map(String) : undefined;
     } 
-    catch { }
+    catch {}
 
     const user: User = {
         id: 'id',
-        name: url.searchParams.get('name') || undefined,
-        age: parseInt(url.searchParams.get('age')) || undefined,
+        name: url.searchParams.get('name'),
+        age: parseInt(url.searchParams.get('age')),
         hobbies: hobbies
     }
 
     return Object.values(user).some(value => value === undefined) ? undefined : user;
 }
+
 
 interface UrlParams {
     path: string,
@@ -43,7 +45,6 @@ const parseURL = (request: IncomingMessage): UrlParams => {
 
     const url = new URL(request.url, `http://${request.headers.host}`);
     
-
     const urlParams: UrlParams = {
         path: undefined,
         id: parseUserID(url),
@@ -67,4 +68,4 @@ const parseURL = (request: IncomingMessage): UrlParams => {
     return urlParams;
 }
 
-export { parseURL };
+export { parseURL, UrlParams, API_ROUTE };
