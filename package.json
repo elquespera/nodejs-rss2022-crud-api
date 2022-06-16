@@ -21,6 +21,7 @@
   "homepage": "https://github.com/elquespera/nodejs-rss2022-crud-api#readme",
   "devDependencies": {
     "@types/uuid": "^8.3.4",
+    "jest": "^28.1.1",
     "nodemon": "^2.0.16",
     "ts-loader": "^9.3.0",
     "typescript": "^4.7.3",
