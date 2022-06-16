@@ -22,7 +22,7 @@ export const PORT = process.env.PORT || 5000;
 // Process events from http Server
 export const serverListener = (req: IncomingMessage, res: ServerResponse) => {
 
-    const checkPath = (path: string, method: string): boolean => {
+    const isPathValid = (path: string, method: string): boolean => {
         return ((path === API_ROUTE && ['GET', 'POST'].includes(method)) ||
                 (path === API_ROUTE + '/' && ['GET', 'PUT', 'DELETE'].includes(method))); 
     }
@@ -31,7 +31,7 @@ export const serverListener = (req: IncomingMessage, res: ServerResponse) => {
         const url: UrlParams = parseURL(req);
 
         // Check if url is valid for a given method
-        if (checkPath(url.path, req.method)) {
+        if (isPathValid(url.path, req.method)) {
 
             // Method Switch
             switch (req.method) {
