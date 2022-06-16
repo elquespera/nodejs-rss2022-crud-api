@@ -1,9 +1,9 @@
 import { IncomingMessage, ServerResponse } from 'http';
 
-import { Users } from './users';
+import { Users } from './users.js';
 import { sendMessage, sendMessageIfDefined, send400, 
-         send404, send500, ERROR_400_FIELD } from './messages';
-import { parseURL, UrlParams, API_ROUTE } from './url';
+         send404, send500, ERROR_400_FIELD } from './messages.js';
+import { parseURL, UrlParams, API_ROUTE } from './url.js';
 
 import 'dotenv/config';
 

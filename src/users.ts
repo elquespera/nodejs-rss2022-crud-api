@@ -1,13 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { User } from "./user";
+import { User } from "./user.js";
 
 export class Users {
     users: Array<User> = [];
-
-    constructor() {
-
-    }
 
     findUser(id: string): number {
         return this.users.findIndex(user => user.id === id);
