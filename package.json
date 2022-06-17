@@ -5,10 +5,11 @@
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
+    "start": "nodemon ./src/index.ts",
     "start:dev": "nodemon ./dist/index.js",
     "start:prod": "tsc && node ./dist/index.js",
     "test": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/**/*.ts'",
-    "start": "nodemon ./src/index.ts"
+    "test1": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test1.ts'"
   },
   "repository": {
     "type": "git",

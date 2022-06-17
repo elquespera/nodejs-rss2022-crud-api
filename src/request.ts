@@ -16,7 +16,6 @@ const parseUserID = (url: URL): string => {
 const parseUserParams = (body: string): User => {
     try {
         const userData = JSON.parse(body);
-        console.log(userData);
 
         const user: User = {
             id: 'id',
