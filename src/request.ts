@@ -12,28 +12,28 @@ const parseUserID = (url: URL): string => {
     return validateUUID(parts[3]) ? parts[3] : undefined;
 }
 
-// Convert URL params into User class
-const parseUserParams = (url: URL): User => {
-    
-    let hobbies;
+// Convert request body into User class
+const parseUserParams = (body: string): User => {
     try {
-        hobbies = JSON.parse(url.searchParams.get('hobbies'));
-        hobbies = Array.isArray(hobbies) ? hobbies.map(String) : undefined;
-    } 
-    catch {}
+        const userData = JSON.parse(body);
+        console.log(userData);
 
-    const user: User = {
-        id: 'id',
-        name: url.searchParams.get('name') || undefined,
-        age: parseInt(url.searchParams.get('age')) || undefined,
-        hobbies: hobbies
+        const user: User = {
+            id: 'id',
+            name: userData.name || undefined,
+            age: parseInt(userData.age) || undefined,
+            hobbies: Array.isArray(userData.hobbies) ? userData.hobbies : undefined,
+        }
+
+        return Object.values(user).some(value => value === undefined) ? undefined : user;
     }
-
-    return Object.values(user).some(value => value === undefined) ? undefined : user;
+    catch {
+        return undefined;
+    }
 }
 
 
-interface UrlParams {
+interface RequestParams {
     path: string,
     id: string,
     data: User
@@ -41,14 +41,14 @@ interface UrlParams {
 
 const API_ROUTE = '/api/users';
 
-const parseURL = (request: IncomingMessage): UrlParams => {
+const parseRequest = (request: IncomingMessage, body: string): RequestParams => {
 
     const url = new URL(request.url, `http://${request.headers.host}`);
     
-    const urlParams: UrlParams = {
+    const requestParams: RequestParams = {
         path: undefined,
         id: parseUserID(url),
-        data: parseUserParams(url)
+        data: parseUserParams(body)
     }
 
     if (url.pathname.startsWith(API_ROUTE)) {
@@ -56,18 +56,18 @@ const parseURL = (request: IncomingMessage): UrlParams => {
         switch (parts.length) {
             case 3:
                 if (url.pathname === API_ROUTE) {
-                    urlParams.path = API_ROUTE;
+                    requestParams.path = API_ROUTE;
                 }
                 break;
             case 4:
                 if (parts.slice(0, 3).join('/') === API_ROUTE) {
-                    urlParams.path = API_ROUTE + '/';
+                    requestParams.path = API_ROUTE + '/';
                 }
                 break; 
         }
     }
 
-    return urlParams;
+    return requestParams;
 }
 
-export { parseURL, UrlParams, API_ROUTE };
+export { parseRequest, RequestParams, API_ROUTE };

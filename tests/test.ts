@@ -8,7 +8,7 @@ import User  from '../src/user.js';
 
 chai.use(chaiHttp);
 
-const server = runServer();
+const server = runServer(true);
 
 describe("Test Scenario 1", function () { 
 
@@ -23,21 +23,20 @@ describe("Test Scenario 1", function () {
             done(err);
           });
     });
-  });
-
-
-  describe(`Create a new user record with POST request to ${API_ROUTE}`, function () {
-    it('GET all users', done => {
+    it('Create a new user with POST', done => {
       chai.request(server)
-          .get(API_ROUTE)
+          .post(API_ROUTE)
+          .send({name: 'Name', age: 22, hobbies: []})
           .end((err, res) => {
+            console.log(res.body);
             res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body.length.should.be.eql(0);
+            // res.body.should.be.a('array');
+            // res.body.length.should.be.eql(0);
             done(err);
           });
     });
   });
+
 
   server.close();
 });

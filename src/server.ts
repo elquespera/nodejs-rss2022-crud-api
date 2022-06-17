@@ -3,17 +3,12 @@ import { createServer, IncomingMessage, ServerResponse } from 'http';
 import { Users } from './users.js';
 import { sendMessage, sendMessageIfDefined, send400, 
          send404, send500, ERROR_400_FIELD } from './messages.js';
-import { parseURL, UrlParams, API_ROUTE } from './url.js';
+import { parseRequest, RequestParams, API_ROUTE } from './request.js';
 
 import 'dotenv/config';
+import { parse } from 'dotenv';
 
 const users = new Users();
-
-// users.add('Somebody', 22, []);
-// users.add('Ann', 245, []);
-// users.add('Joe Smith', 38, ['Piano', 'Cooking']);
-// users.add('Jill', 55, ['Skating']);
-
 
 
 // Try to import PORT from .env file,
@@ -22,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 
 
 // Process events from http Server
-const serverListener = (req: IncomingMessage, res: ServerResponse) => {
+const serverListener = async (req: IncomingMessage, res: ServerResponse) => {
 
     const isPathValid = (path: string, method: string): boolean => {
         return ((path === API_ROUTE && ['GET', 'POST'].includes(method)) ||
@@ -30,38 +25,45 @@ const serverListener = (req: IncomingMessage, res: ServerResponse) => {
     }
 
     try {
-        const url: UrlParams = parseURL(req);
+        // Read body data
+        const buffer = [];
+        for await (const chunk of req) {
+            buffer.push(chunk);
+        }
+        const body = Buffer.concat(buffer).toString();
 
-        // Check if url is valid for a given method
-        if (isPathValid(url.path, req.method)) {
+        const data: RequestParams = parseRequest(req, body);
+
+        // Check if path is valid for a given method
+        if (isPathValid(data.path, req.method)) {
 
             // Method Switch
             switch (req.method) {
                 case 'GET':
-                    if (url.path === API_ROUTE) {
+                    if (data.path === API_ROUTE) {
                         sendMessage(res, 200, users.getAllUsers());
                     }
                     else {              
-                        if (url.id) {
-                            sendMessageIfDefined(res, 200, url.id, users.getUser(url.id));
+                        if (data.id) {
+                            sendMessageIfDefined(res, 200, data.id, users.getUser(data.id));
                         } else 
                             send400(res);
                     }
                     break;
 
                 case 'POST': 
-                    if (url.data) {
-                        sendMessage(res, 201, users.update(url.data, true));
+                    if (data.data) {
+                        sendMessage(res, 201, users.update(data.data, true));
                     }
                     else
                         send400(res, ERROR_400_FIELD);
                     break;   
 
                 case 'PUT': 
-                    if (url.id) {
-                        if (url.data) {
-                            url.data.id = url.id;
-                            sendMessageIfDefined(res, 200, url.id, users.update(url.data));
+                    if (data.id) {
+                        if (data.data) {
+                            data.data.id = data.id;
+                            sendMessageIfDefined(res, 200, data.id, users.update(data.data));
                         } else {
                             send400(res, ERROR_400_FIELD);
                         }
@@ -71,8 +73,8 @@ const serverListener = (req: IncomingMessage, res: ServerResponse) => {
                     break;  
 
                 case 'DELETE':
-                    if (url.id) {
-                        sendMessageIfDefined(res, 204, url.id, users.delete(url.id));
+                    if (data.id) {
+                        sendMessageIfDefined(res, 204, data.id, users.delete(data.id));
                     }
                     else
                         send400(res);                        
@@ -95,9 +97,12 @@ const serverListener = (req: IncomingMessage, res: ServerResponse) => {
 
 
 
-const runServer = () => {
+const runServer = (silent = false) => {
     const server = createServer(serverListener);
-    server.listen(PORT, () => console.log(`Server running on port ${PORT}`));  
+    server.listen(PORT, () => {
+        if (!silent)
+            console.log(`Server running on port ${PORT}`)
+    });  
     return server;  
 }
 
