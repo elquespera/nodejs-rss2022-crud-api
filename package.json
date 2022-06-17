@@ -9,7 +9,8 @@
     "start:dev": "nodemon ./dist/index.js",
     "start:prod": "tsc && node ./dist/index.js",
     "test": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/**/*.ts'",
-    "test1": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test1.ts'"
+    "test1": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test1.ts'",
+    "test2": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test2.ts'"
   },
   "repository": {
     "type": "git",
