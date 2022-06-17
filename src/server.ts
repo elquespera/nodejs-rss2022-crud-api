@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { createServer, IncomingMessage, ServerResponse } from 'http';
 
 import { Users } from './users.js';
 import { sendMessage, sendMessageIfDefined, send400, 
@@ -9,18 +9,20 @@ import 'dotenv/config';
 
 const users = new Users();
 
-users.add('Somebody', 22, []);
-users.add('Ann', 245, []);
-users.add('Joe Smith', 38, ['Piano', 'Cooking']);
-users.add('Jill', 55, ['Skating']);
+// users.add('Somebody', 22, []);
+// users.add('Ann', 245, []);
+// users.add('Joe Smith', 38, ['Piano', 'Cooking']);
+// users.add('Jill', 55, ['Skating']);
+
 
 
 // Try to import PORT from .env file,
 // if not, default to 5000
-export const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
+
 
 // Process events from http Server
-export const serverListener = (req: IncomingMessage, res: ServerResponse) => {
+const serverListener = (req: IncomingMessage, res: ServerResponse) => {
 
     const isPathValid = (path: string, method: string): boolean => {
         return ((path === API_ROUTE && ['GET', 'POST'].includes(method)) ||
@@ -90,3 +92,13 @@ export const serverListener = (req: IncomingMessage, res: ServerResponse) => {
     }        
 
 }
+
+
+
+const runServer = () => {
+    const server = createServer(serverListener);
+    server.listen(PORT, () => console.log(`Server running on port ${PORT}`));  
+    return server;  
+}
+
+export default runServer;

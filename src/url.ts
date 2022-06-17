@@ -2,7 +2,7 @@ import { validate as validateUUID } from 'uuid';
 import { IncomingMessage, ServerResponse } from 'http';
 import { URL } from 'url';
 
-import { User } from './user.js';
+import User  from './user.js';
 
 
 // Parse uuid from url like api/users/uuid
