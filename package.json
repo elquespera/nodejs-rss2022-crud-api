@@ -8,6 +8,7 @@
     "start": "nodemon ./src/index.ts",
     "start:dev": "nodemon ./dist/index.js",
     "start:prod": "tsc && node ./dist/index.js",
+    "start:multi": "nodemon ./src/multi.ts",
     "test": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/**/*.ts'",
     "test1": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test1.ts'",
     "test2": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test2.ts'"
@@ -32,7 +33,6 @@
     "chai-http": "^4.3.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.16",
-    "supertest": "^6.2.3",
     "ts-loader": "^9.3.0",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"
