@@ -10,7 +10,6 @@ import 'dotenv';
 
 const users = new Users();
 
-
 // Try to import PORT from .env file,
 // if not, default to 5000
 const PORT = process.env.PORT || 5000;

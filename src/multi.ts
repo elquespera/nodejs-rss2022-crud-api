@@ -20,8 +20,8 @@ const runCluster = (number: number = cpuNumber) => {
             console.log(`Worker ${worker.process.pid} has exited`);
         });
     } else {
-        runServer(true);
         console.log(`Worker process ${process.pid} started`);
+        runServer(true);
     }
 }
 

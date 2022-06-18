@@ -11,7 +11,8 @@
     "start:multi": "nodemon ./src/multi.ts",
     "test": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/**/*.ts'",
     "test1": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test1.ts'",
-    "test2": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test2.ts'"
+    "test2": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test2.ts'",
+    "test3": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test3.ts'"
   },
   "repository": {
     "type": "git",
