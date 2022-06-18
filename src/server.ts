@@ -6,7 +6,7 @@ import { sendMessage, sendMessageIfDefined, send400,
 import { parseRequest, RequestParams, API_ROUTE } from './request.js';
 
 import 'dotenv/config';
-import { parse } from 'dotenv';
+import 'dotenv';
 
 const users = new Users();
 

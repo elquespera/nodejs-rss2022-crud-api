@@ -2,16 +2,9 @@ import { API_ROUTE } from '../src/request.js';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 const should = chai.should();
-
-import runServer from '../src/server.js';
-
 chai.use(chaiHttp);
 
-const server = runServer(true);
-
-const logResponse = (status: number, body: any) => {
-    console.log('Server response:', status, body);
-}
+import { server, logResponse } from './test-utils.js';
 
 describe("Test Scenario 2. Invalid input data", () => { 
 
@@ -74,5 +67,5 @@ describe("Test Scenario 2. Invalid input data", () => {
 
   });
 
-  server.close();
+  // server.close();
 });
