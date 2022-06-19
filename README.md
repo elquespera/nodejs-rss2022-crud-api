@@ -1,8 +1,8 @@
-# CRUD API
+# CRUD API Server App
 
 ## Description
 
-A simple CRUD API in Node.js is an [assignment](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md) for the third week of RS School [Node.js Development Course](https://github.com/AlreadyBored/nodejs-assignments). Its goal is to implement a [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update and delete) server that is capable of storing and manipulating user information in an in-memory database.
+A simple **CRUD API Server using Node.js** is an [assignment](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md) for the third week of RS School [Node.js Development Course](https://github.com/AlreadyBored/nodejs-assignments). Its goal is to implement a [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update and delete) server that is capable of storing and manipulating user information using an in-memory database.
 
 ## Technical specs
 
@@ -24,7 +24,7 @@ The following **developer dependencies** were utilized:
 
 1. Clone [this repository](https://github.com/elquespera/nodejs-rss2022-crud-api) and checkout to dev branch:
 
-```
+```console
 git clone https://github.com/elquespera/nodejs-rss2022-crud-api.git
 cd ./nodejs-rss2022-crud-api
 git checkout dev
@@ -32,7 +32,7 @@ git checkout dev
 
 2. Install dependencies:
 
-```
+```console
 npm install
 ```
 
