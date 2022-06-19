@@ -24,7 +24,7 @@ The following **developer dependencies** were utilized:
 
 1. Clone [this repository](https://github.com/elquespera/nodejs-rss2022-crud-api) and checkout to dev branch:
 
-```console
+```shell
 git clone https://github.com/elquespera/nodejs-rss2022-crud-api.git
 cd ./nodejs-rss2022-crud-api
 git checkout dev
@@ -32,7 +32,7 @@ git checkout dev
 
 2. Install dependencies:
 
-```console
+```shell
 npm install
 ```
 
