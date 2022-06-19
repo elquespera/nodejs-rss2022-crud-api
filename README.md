@@ -6,14 +6,14 @@ A simple CRUD API in Node.js is an [assignment](https://github.com/AlreadyBored/
 
 ## Technical specs
 
-The task was performed in pure Node.js using `http` module and minimal amount of external libraries as a learning exercise.
+The task was performed in pure `Node.js v16.15.0` using `http` module and minimal amount of external libraries as a learning exercise.
 
-The following external dependencies were used:
+The following external **dependencies** were used:
 
 - `dotenv` for parsing `.env` file;
 - `uuid` for generating a Universal Unique Identifier.
 
-The following developer dependencies were utilized:
+The following **developer dependencies** were utilized:
 
 - `nodemon` for automatic executing files on change;
 - `typescript`, `ts-node`, `ts-loader` for typescript transpiling;
@@ -22,7 +22,7 @@ The following developer dependencies were utilized:
 
 ## Installation
 
-1. Clone this repository and checkout to dev branch:
+1. Clone [this repository](https://github.com/elquespera/nodejs-rss2022-crud-api) and checkout to dev branch:
 
 ```
 git clone https://github.com/elquespera/nodejs-rss2022-crud-api.git
