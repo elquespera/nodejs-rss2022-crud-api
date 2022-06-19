@@ -50,4 +50,4 @@ The following scripts are available for building, running and testing the applic
 - `npm run test3` to run all test scenario #3 [^1];
 
 
-[^1]: Test scripts must be run alongside an instance of the app.
+[^1]: Test scripts must be run alongside an open instance of the app.

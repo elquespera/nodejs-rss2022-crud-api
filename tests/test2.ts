@@ -66,6 +66,5 @@ describe("Test Scenario 2. Invalid input data", () => {
     });
 
   });
-
-  // server.close();
+  
 });
