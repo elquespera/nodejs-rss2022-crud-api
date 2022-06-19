@@ -41,10 +41,10 @@ npm install
 The following scripts are available for building, running and testing the applicaiton:
 
 - `npm start` for watching ts files with on-the-fly transpiling;
+- `npm run start:dev` the same as `npm start`;
 - `npm run start:prod` to transpile ts files and run `node index.js`;
-- `npm run start:dev` for watching transpiled js files;
-- `npm run start:multi` to watch the cluster version of the app;
-- `npm test` to run all testing scenarios available;
+- `npm run start:multi` to start and watch the cluster version of the app;
+- `npm test` to run all testing scenarios available [^1];
 - `npm run test1` to run all test scenario #1 [^1];
 - `npm run test2` to run all test scenario #2 [^1];
 - `npm run test3` to run all test scenario #3 [^1];
