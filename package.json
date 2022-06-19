@@ -1,0 +1,45 @@
+{
+  "name": "3-nodejs-rss2022-crud-api",
+  "version": "1.0.0",
+  "description": "A simple CRUD API in Node.js",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.ts",
+    "start:dev": "nodemon ./src/index.ts",
+    "start:prod": "tsc && node ./dist/index.js",
+    "start:multi": "nodemon ./src/multi.ts",
+    "test": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/**/*.ts'",
+    "test1": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test1.ts'",
+    "test2": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test2.ts'",
+    "test3": "node --loader ts-node/esm ./node_modules/mocha/bin/mocha --extension ts './tests/test3.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elquespera/nodejs-rss2022-crud-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elquespera/nodejs-rss2022-crud-api/issues"
+  },
+  "homepage": "https://github.com/elquespera/nodejs-rss2022-crud-api#readme",
+  "devDependencies": {
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "@types/supertest": "^2.0.12",
+    "@types/uuid": "^8.3.4",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.16",
+    "ts-loader": "^9.3.0",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "uuid": "^8.3.2"
+  }
+}
